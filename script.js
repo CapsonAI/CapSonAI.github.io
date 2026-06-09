@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const transcriptList = document.getElementById('transcript-list');
     const downloadSrtBtn = document.getElementById('download-srt');
 
-    // 1. Theme Configuration Event Rules
     if (themeToggle) {
         themeToggle.addEventListener('click', (e) => {
             e.preventDefault();
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Aspect Ratio / Format Mode Configuration Switcher with Adaptive Text Trimming
+
     if (videoFormatSelect && playerContainer) {
         videoFormatSelect.addEventListener('change', (e) => {
             const format = e.target.value;
@@ -57,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Helper to format string chunks dynamically for viewport constraints (max 3 words per chunk)
+
     function formatCaptionTextForLayout(text) {
         if (!text) return "";
         const isShortsMode = videoFormatSelect ? (videoFormatSelect.value === 'shorts') : false;
@@ -76,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return builtLines.join('\n');
     }
 
-    // 3. Video Player Integration
+
     if (videoInput) {
         videoInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -96,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Absolute Coordinate Caption Drag Mechanics
+
     if (captionOverlay) {
         captionOverlay.addEventListener('mousedown', (e) => {
             isDragging = true;
@@ -133,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('mouseup', () => isDragging = false);
     }
 
-    // 5. Customizer Engine Callbacks
+
     if (captionSizeInput) {
         captionSizeInput.addEventListener('input', (e) => {
             const size = e.target.value;
@@ -154,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // High-Performance Audio Downsampling Infrastructure
     async function extractAudioBuffer(file) {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
         const fileBuffer = await file.arrayBuffer();
@@ -172,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return audioBuffer.getChannelData(0);
     }
 
-    // Advanced Technical Context Audio Glossary Filter Rules
+
     function processEnvironmentalAudio(text) {
         let cleanText = text.trim();
         if (!cleanText || cleanText.length < 2) return null;
@@ -188,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const mcDictionary = [
-            // --- REDSTONE AUTOMATION COMPONENTS & CIRCUITRY ---
+
             { wrong: /\b(competitors|competitor|comp্যারator|comparetor)\b/gi, right: "comparator" },
             { wrong: /\b(server|observers|observation block|observe her)\b/gi, right: "observer" },
             { wrong: /\b(stripper|droppers|driver)\b/gi, right: "dropper" },
@@ -208,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { wrong: /\b(repeater lock|locking repeaters)\b/gi, right: "repeater locking" },
             { wrong: /\b(wireless redstone|skulk sensor wireless)\b/gi, right: "Sculk wireless" },
 
-            // --- REDSTONE SIGNALS, CLOCKS, & SYSTEMS ---
             { wrong: /\b(shielding|shielding of 15|signal 15|single 15)\b/gi, right: "signal of 15" },
             { wrong: /\b(powered level 14|power 14|powered 14)\b/gi, right: "power level 14" },
             { wrong: /\b(strength 15|signal strength 15)\b/gi, right: "signal strength 15" },
@@ -218,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { wrong: /\b(item filter system|sorting system logic)\b/gi, right: "multi-item sorter" },
             { wrong: /\b(quasi connectivity|quasi-connectivity logic|qc bug)\b/gi, right: "quasi-connectivity" },
 
-            // --- BLOCK & METADATA INFRASTRUCTURE ---
+
             { wrong: /\b(hobby|obby|obsidian casing)\b/gi, right: "obby" },
             { wrong: /\b(crying hobby|crying obsidian block)\b/gi, right: "crying obby" },
             { wrong: /\b(target block processing)\b/gi, right: "target block" },
@@ -227,7 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { wrong: /\b(block state properties|blockstates)\b/gi, right: "block states" },
             { wrong: /\b(tile entity data|block entities)\b/gi, right: "block entity" },
 
-            // --- MOB TYPES & ENTITY ENGINES ---
             { wrong: /\b(skelly|skellies|bone archer)\b/gi, right: "skelly" },
             { wrong: /\b(wither skelly|wither skeleton head)\b/gi, right: "wither skelly" },
             { wrong: /\b(piglin bartering loop|piglin trades)\b/gi, right: "piglin bartering" },
@@ -237,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { wrong: /\b(blaze rod processing farm)\b/gi, right: "blaze farm" },
             { wrong: /\b(ender dragon boss fight)\b/gi, right: "Ender Dragon" },
 
-            // --- PASSIVE & MECHANIZED GRINDING FARMS ---
+
             { wrong: /\b(iron farm processing|golem farm layout)\b/gi, right: "iron farm" },
             { wrong: /\b(raid farm processing|stacking raid loop)\b/gi, right: "stacking raid farm" },
             { wrong: /\b(witch hut ticking farm|perimeter witch)\b/gi, right: "witch farm" },
@@ -246,7 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { wrong: /\b(gold farm netting|nether roof portal processing)\b/gi, right: "gold farm" },
             { wrong: /\b(wood tree farm automatic|tnt duper farm)\b/gi, right: "universal tree farm" },
 
-            // --- TECHNICAL CHUNK & SERVER TICK STABILITY ---
             { wrong: /\b(spawn chunks parameters|always loaded chunks)\b/gi, right: "spawn chunks" },
             { wrong: /\b(lazy chunks logic|non-entity chunks)\b/gi, right: "lazy chunks" },
             { wrong: /\b(chunk loaders|portal loaders tracking)\b/gi, right: "chunk loader" },
@@ -256,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { wrong: /\b(tick skip processing|tick freeze tracking)\b/gi, right: "tick warping" },
             { wrong: /\b(sub-chunk updates|render engine distances)\b/gi, right: "sub-chunks" },
 
-            // --- HIGH-TIER COMPETITIVE PVP MECHANICS ---
+
             { wrong: /\b(w-tap tracking|w tap sprint combo)\b/gi, right: "W-tapping" },
             { wrong: /\b(s-tap defensive tracking|s tap distance control)\b/gi, right: "S-tapping" },
             { wrong: /\b(block clutching save|clutching off walls)\b/gi, right: "block clutching" },
@@ -268,7 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { wrong: /\b(lava placing wrap|lava tracking bucket wrap)\b/gi, right: "lava wrapping" },
             { wrong: /\b(potting speeds healing|splash potion delay)\b/gi, right: "fast potting" },
 
-            // --- MULTIPLAYER SERVER ECONOMIES & PLUGINS ---
             { wrong: /\b(griefers protection tracking|griefing logic claim)\b/gi, right: "griefer protection" },
             { wrong: /\b(prison server setups|op prison grinding rank)\b/gi, right: "prison server" },
             { wrong: /\b(donut smp configurations|spawn trap claims)\b/gi, right: "Donut SMP" },
@@ -285,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return cleanText;
     }
 
-    // Helper to turn raw audio arrays into a standard WAV format file structure
+
     function bufferToWav(buffer, sampleRate) {
         const bufferLength = buffer.length;
         const wavArray = new Uint8Array(44 + bufferLength * 2);
@@ -313,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return new Blob([wavArray], { type: 'audio/wav' });
     }
 
-    // 6. Intelligent Transcribing Pipeline Implementation (Upgraded to Cloudflare Workers AI Edge Network)
+
     if (startTranscriptionBtn) {
         startTranscriptionBtn.addEventListener('click', async () => {
             if (!currentVideoFile) return alert("Please upload a video file first.");
@@ -336,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (statusBar) statusBar.style.width = '60%';
                 if (statusPercentage) statusPercentage.textContent = '60%';
                 
-                // 🔥 FIXED PIECE: Stream raw un-nested blob data directly to bypass serialization issues
+
                 const response = await fetch('https://capsonai.qualiwar.workers.dev', {
                     method: 'POST',
                     body: wavBlob,
@@ -355,7 +349,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (statusBar) statusBar.style.width = '90%';
                 if (statusPercentage) statusPercentage.textContent = '90%';
 
-                // Handle Whisper's high-precision native timeline segments layout natively and filter hallucinations
                 if (data.segments && data.segments.length > 0) {
                     subtitlesData = data.segments.map(seg => {
                         const cleanWordsText = processEnvironmentalAudio(seg.text);
@@ -394,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. UI Render & Multi-line Expandable Formats Engine
+
     function renderTranscriptInterface(data) {
         const scrollWrapper = document.querySelector('.transcript-scroll-wrapper');
         if (scrollWrapper) {
@@ -433,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 8. Video Subtitle Sync Update Injections
+
     function updateActiveCaptionDisplay() {
         if (!videoPreview || subtitlesData.length === 0) return;
         const currentTime = videoPreview.currentTime;
@@ -447,7 +440,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 9. SRT Outbound Exporter Component Engine
     function bindVideoTimelineSync() {
         videoPreview.addEventListener('timeupdate', updateActiveCaptionDisplay);
     }
