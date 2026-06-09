@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapSon AI</title>
+    
+    <link class="favicon-target" rel="icon" type="image/png" href="logo.png">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark">
+
+    <header class="navbar-header">
+        <div class="logo-container">
+            <img src="logo.png" alt="CapSon AI Logo" class="site-logo">
+            <span class="brand-text">CapSon <span class="accent-text">AI</span></span>
+        </div>
+        
+        <button id="theme-toggle" class="theme-button" aria-label="Toggle Theme Mode">
+            <span class="shape-sun"></span>
+            <span class="shape-moon"></span>
+        </button>
+    </header>
+
+    <main class="main-layout">
+        
+        <div class="workspace-left">
+            
+            <div class="video-card">
+                <div class="upload-zone" id="upload-container">
+                    <div class="upload-icon-wrapper">
+                        <svg class="upload-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                    </div>
+                    <h3 class="upload-title">Upload Video Footage</h3>
+                    <p class="upload-subtitle">Drag and drop your file here, or use the selection button below</p>
+                    
+                    <label for="video-input" class="btn-primary" style="margin-top: 0.5rem; cursor: pointer;">
+                        Select Video File
+                    </label>
+                    <input type="file" id="video-input" accept="video/*" style="display: none;">
+                </div>
+
+                <div class="player-workspace normal-mode" id="player-container">
+                    <video id="video-preview" controls class="video-element">
+                        Your system browser platform engine does not support video playbacks.
+                    </video>
+                    <div id="caption-overlay">Subtitles Preview Area</div>
+                </div>
+            </div>
+
+            <div class="controls-card">
+                <h2 class="section-title">
+                    <svg class="section-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                    </svg>
+                    Caption Customizer
+                </h2>
+                
+                <div class="controls-grid">
+                    <div class="control-group">
+                        <label class="control-label" for="video-format">Video Display Type</label>
+                        <div class="select-wrapper">
+                            <select id="video-format" class="format-select">
+                                <option value="normal" selected>Normal Video (16:9 Landscape)</option>
+                                <option value="shorts">Shorts / Reel (9:16 Vertical)</option>
+                            </select>
+                            <div class="select-arrow">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="caption-size">
+                            <span>Font Dimension Scale</span>
+                            <span id="size-val">24px</span>
+                        </label>
+                        <input type="range" id="caption-size" class="range-slider" min="14" max="48" value="24">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Color Layers Configuration</label>
+                        <div class="color-picker-row">
+                            <input type="color" id="caption-color" class="color-dot" value="#ffffff" title="Text Color Selection">
+                            <input type="color" id="caption-bg" class="color-dot" value="#000000" title="Background Mask Selection">
+                            <span class="picker-hint">1st one is text color and 2nd one is background color</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="info-tip">
+                    <svg class="tip-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Click and drag the live caption text directly within the video frame to change its placement.
+                </p>
+            </div>
+        </div>
+
+        <div class="workspace-right">
+            <div class="transcript-card">
+                
+                <div class="ai-trigger-box" id="ai-trigger-zone" style="display: none;">
+                    <p class="trigger-text">Local media file ready for local audio analysis pipelines</p>
+                    <button id="start-transcription-btn" class="btn-ai">
+                        <svg class="btn-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                        Generate Captions with AI
+                    </button>
+                </div>
+
+                <div class="status-box" id="status-panel" style="display: none;">
+                    <div class="status-header">
+                        <span id="status-text">Readying compilation layers...</span>
+                        <span id="status-percentage">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="status-bar"></div>
+                    </div>
+                </div>
+
+                <div class="transcript-scroll-wrapper">
+                    <div id="transcript-list" class="transcript-placeholder">
+                        <svg class="placeholder-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path>
+                        </svg>
+                        <p>Upload a video to parse audio channels into editable text lines</p>
+                    </div>
+                </div>
+
+                <div class="actions-footer">
+                    <button id="download-srt" class="btn-export" disabled>
+                        <svg class="btn-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        Download SRT Subtitles File
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-branding-footer">
+        <span class="signature-text">-By Qualiwar</span>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
